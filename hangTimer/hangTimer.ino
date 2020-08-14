@@ -12,11 +12,13 @@ int btnPin = 5;
 
 unsigned char digit[]= {0xd7, 0x11, 0xcd, 0x5d, 0x1b, 0x5e, 0xde, 0x15, 0xdf, 0x1f, 0xd7};
 unsigned char dot = 0x20;
+
 int number [] = {0,0,0,0};
 unsigned long prevTime = 0;
 unsigned long initTime = 0;
+
 unsigned long cooldownStart = 0;
-int cooldown = 500;
+int cooldown = 1000;
 int systemState = 0;
 
 void setup() {
@@ -133,7 +135,7 @@ void loop() {
       }
       break;
     case 2: //Time display
-      if (millis() - cooldownStart > 1000){
+      if (millis() - cooldownStart > cooldown){
         while (digitalRead(btnPin) == LOW){
           Display(number[0],number[1],number[2],number[3]);
         }
